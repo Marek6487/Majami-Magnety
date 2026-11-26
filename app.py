@@ -361,7 +361,7 @@ with tab_customer:
             box_color="#FF4B4B",
             aspect_ratio=aspect,
             return_type="box",
-            key=f"cropper_{st.session_state['pocitadlo_nahravania']}",
+        key=f"cropper_{st.session_state['pocitadlo_nahravania']}",
         )
 
         if orient == "portrait":
