@@ -257,7 +257,7 @@ def render_a4_pdf(slot_items: list[dict], summary_names: list[str]) -> bytes:
             "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
         ]:
             try:
-                font = ImageFont.truetype(p, 44)
+                font = ImageFont.truetype(p, 38)
                 break
             except Exception:
                 pass
