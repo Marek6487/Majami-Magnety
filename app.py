@@ -2,7 +2,7 @@ import io
 import qrcode
 import os
 import uuid
-import timeM
+import time
 from datetime import datetime
 from pathlib import Path
 import shutil
