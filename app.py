@@ -2,7 +2,7 @@ import io
 import qrcode
 import os
 import uuid
-import time
+import timeM
 from datetime import datetime
 from pathlib import Path
 import shutil
@@ -14,7 +14,15 @@ import fitz  # PyMuPDF
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 import streamlit as st
 from streamlit_cropper import st_cropper
+import hashlib
 
+def get_admin_token():
+    secret_src = str(globals().get("ADMIN_PASSWORD", "majami_secret"))
+    return hashlib.sha256(secret_src.encode()).hexdigest()[:16]
+
+if st.query_params.get("auth") == get_admin_token():
+    st.session_state["admin_authenticated"] = True
+Majami198521
 def make_qr_png_bytes(url: str) -> bytes:
     qr = qrcode.QRCode(
         version=None,
@@ -461,7 +469,7 @@ with tab_customer:
         else:
             st.session_state.pop("faza_odoslania", None)
             st.session_state.pop("odoslane_do", None)
-
+            st.query_params["auth"] = get_admin_token()
 with tab_admin:
 
     if not st.session_state.get("admin_authenticated"):
@@ -469,6 +477,7 @@ with tab_admin:
             pwd = st.text_input("Zadaj heslo:", type="password", key="admin_pwd_input")
             if st.button("Prihlásiť sa", key="admin_login_btn"):
                 if pwd == ADMIN_PASSWORD:
+                    st.query_params.pop("auth", None)
                     st.session_state["admin_authenticated"] = True
                     st.rerun()
                 else:
