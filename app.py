@@ -320,14 +320,16 @@ with tab_customer:
             
     if "pocitadlo_nahratia" not in st.session_state:
         st.session_state["pocitadlo_nahratia"] = 0
-
+    if "ulozene_meno_zakaznika" not in st.session_state:
+    st.session_state["ulozene_meno_zakaznika"] = ""
+    
     col1, col2 = st.columns(2)
     with col1:
-        customer_name = st.text_input(
-            "Vaše meno (alebo číslo objednávky)",
-            placeholder="napr. Peter / stôl 3",
-            key=f"meno_{st.session_state['pocitadlo_nahratia']}",
-        )
+    customer_name = st.text_input(
+        "Vaše meno (alebo číslo objednávky)",
+        placeholder="napr. Peter / stôl 3",
+        key="ulozene_meno_zakaznika",
+    )
     with col2:
         qty = st.number_input(
             "Počet kusov rovnakej fotky",
