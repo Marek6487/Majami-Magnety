@@ -350,7 +350,7 @@ with tab_customer:
         raw_img = ImageOps.exif_transpose(raw_img).convert("RGB")
 
         preview_img = raw_img.copy()
-        preview_img.thumbnail((300, 300))
+        preview_img.thumbnail((1400, 1400))
 
         aspect = (69, 94) if orient == "portrait" else (94, 69)
 
