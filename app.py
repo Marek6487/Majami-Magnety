@@ -350,28 +350,35 @@ with tab_customer:
         raw_img = ImageOps.exif_transpose(raw_img).convert("RGB")
 
         preview_img = raw_img.copy()
-        preview_img.thumbnail((1400, 1400))
+    preview_img.thumbnail((600, 600))
 
-        aspect = (69, 94) if orient == "portrait" else (94, 69)
+    aspect = (65, 90) if orient == "portrait" else (90, 65)
 
-        st.markdown("Upravte výrez fotky (posuňte alebo zmeňte veľkosť rámčeka):")
-        cropped_preview = st_cropper(
-            preview_img,
-            realtime_update=True,
-            box_color="#FF4B4B",
-            aspect_ratio=aspect,
-            key=f"orez_{st.session_state['pocitadlo_nahratia']}",
-        )
-        
+    st.markdown("Upravte výrez fotky (posuňte alebo zmeňte veľkosť rámčeka):")
+    crop_box = st_cropper(
+        preview_img,
+        realtime_update=True,
+        box_color="#FF4B4B",
+        aspect_ratio=aspect,
+        return_type="box",
+        key=f"cropper_{st.session_state['pocitadlo_nahravania']}",
+    )
 
+    if orient == "portrait":
+        final_w, final_h = mm_to_px(INNER_W_MM), mm_to_px(INNER_H_MM)
+    else:
+        final_w, final_h = mm_to_px(INNER_H_MM), mm_to_px(INNER_W_MM)
 
-        if orient == "portrait":
-            final_w, final_h = mm_to_px(INNER_W_MM), mm_to_px(INNER_H_MM)
-        else:
-            final_w, final_h = mm_to_px(INNER_H_MM), mm_to_px(INNER_W_MM)
+    scale_x = raw_img.width / preview_img.width
+    scale_y = raw_img.height / preview_img.height
 
-        final_img = cropped_preview.resize((final_w, final_h), Image.Resampling.LANCZOS)
+    left = max(0, int(round(crop_box["left"] * scale_x)))
+    top = max(0, int(round(crop_box["top"] * scale_y)))
+    right = min(raw_img.width, int(round((crop_box["left"] + crop_box["width"]) * scale_x)))
+    bottom = min(raw_img.height, int(round((crop_box["top"] + crop_box["height"]) * scale_y)))
 
+    cropped_raw = raw_img.crop((left, top, right, bottom))
+    final_img = cropped_raw.resize((final_w, final_h), Image.Resampling.LANCZOS)
         st.image(final_img, caption="Náhľad výsledného orezu na magnetku", width=240)
 
         if st.button("✅ Odoslať fotku na výrobu", type="primary", use_container_width=True):
