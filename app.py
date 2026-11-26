@@ -252,7 +252,7 @@ def render_a4_pdf(slot_items: list[dict], summary_names: list[str]) -> bytes:
     draw = ImageDraw.Draw(sheet_img)
     try:
             font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 44)
-        except Exception:
+            except Exception:
             try:
                 font = ImageFont.load_default(size=44)
             except Exception:
