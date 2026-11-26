@@ -251,9 +251,12 @@ def render_a4_pdf(slot_items: list[dict], summary_names: list[str]) -> bytes:
     sheet_label_pos = LABEL_POS_BY_COUNT.get(count, {})
     draw = ImageDraw.Draw(sheet_img)
     try:
-        font = ImageFont.truetype("arial.ttf", 48)
-    except Exception:
-        font = ImageFont.load_default()
+            font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 44)
+        except Exception:
+            try:
+                font = ImageFont.load_default(size=44)
+            except Exception:
+                font = ImageFont.load_default()
 
     for idx, slot in enumerate(active_slots):
         if idx >= len(slot_items) or slot_items[idx] is None:
