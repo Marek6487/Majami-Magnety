@@ -309,9 +309,9 @@ def render_multi_page_a4_pdf(all_items: list[dict], summary_names: list[str]) ->
 
 
 # --- HLAVNÉ ROZHRANIE ---
-st.title("🧲 Majami Laser – Rýchla objednávka a tlač magnetiek")
+st.title("🧲 Majami Magnet – Rýchla objednávka a tlač magnetiek")
 
-tab_customer, tab_admin = st.tabs(["📱 Zákazník (QR upload)", "🖨️ Obsluha & Tlač A4"])
+tab_customer, tab_admin = st.tabs(["📱 Zákazník ", "🖨️ Obsluha & Tlač "])
 
 with tab_customer:
     st.subheader("Nahrajte svoju fotku na magnetku")
