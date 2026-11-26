@@ -251,7 +251,7 @@ def render_a4_pdf(slot_items: list[dict], summary_names: list[str]) -> bytes:
     sheet_label_pos = LABEL_POS_BY_COUNT.get(count, {})
     draw = ImageDraw.Draw(sheet_img)
     try:
-        font = ImageFont.truetype("arial.ttf", 28)
+        font = ImageFont.truetype("arial.ttf", 34)
     except Exception:
         font = ImageFont.load_default()
 
