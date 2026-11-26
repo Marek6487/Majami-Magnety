@@ -325,7 +325,7 @@ with tab_customer:
     
     col1, col2 = st.columns(2)
     with col1:
-    customer_name = st.text_input(
+        customer_name = st.text_input(
         "Vaše meno (alebo číslo objednávky)",
         placeholder="napr. Peter / stôl 3",
         key="ulozene_meno_zakaznika",
