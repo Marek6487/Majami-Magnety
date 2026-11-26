@@ -1,0 +1,6 @@
+streamlit
+pillow
+pymupdf
+streamlit-cropper
+qrcode[pil]
+
