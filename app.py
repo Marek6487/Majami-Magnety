@@ -482,7 +482,7 @@ with tab_admin:
                     st.error("Nesprávne heslo.")
             st.stop()
 
-     if st.button("Odhlásiť sa zo správy", key="admin_logout_btn"):
+    if st.button("Odhlásiť sa zo správy", key="admin_logout_btn"):
             st.session_state["admin_authenticated"] = False
             st.query_params.pop("admin", None)
             st.rerun()
