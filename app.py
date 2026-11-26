@@ -261,7 +261,7 @@ def render_a4_pdf(slot_items: list[dict], summary_names: list[str]) -> bytes:
                 break
             except Exception:
                 pass
-        if font is None:
+    if font is None:
             try:
                 font = ImageFont.load_default(size=44)
             except Exception:
