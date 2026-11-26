@@ -467,7 +467,7 @@ with tab_customer:
         else:
             st.session_state.pop("faza_odoslania", None)
             st.session_state.pop("odoslane_do", None)
-            st.query_params["auth"] = get_admin_token()
+            
 with tab_admin:
 
     if not st.session_state.get("admin_authenticated"):
@@ -482,7 +482,7 @@ with tab_admin:
                     st.error("Nesprávne heslo.")
             st.stop()
 
-        if st.button("Odhlásiť sa zo správy", key="admin_logout_btn"):
+     if st.button("Odhlásiť sa zo správy", key="admin_logout_btn"):
             st.session_state["admin_authenticated"] = False
             st.query_params.pop("admin", None)
             st.rerun()
