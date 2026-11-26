@@ -13,16 +13,14 @@ import zipfile
 import fitz  # PyMuPDF
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 import streamlit as st
-from streamlit_cropper import st_cropper
-import hashlib
+ADMIN_TOKEN = "Majami198521"
 
-def get_admin_token():
-    secret_src = str(globals().get("ADMIN_PASSWORD", "majami_secret"))
-    return hashlib.sha256(secret_src.encode()).hexdigest()[:16]
-
-if st.query_params.get("auth") == get_admin_token():
+if st.query_params.get("admin") == ADMIN_TOKEN:
     st.session_state["admin_authenticated"] = True
-secret_src = "Majami198521"
+    
+from streamlit_cropper import st_cropper
+
+
 def make_qr_png_bytes(url: str) -> bytes:
     qr = qrcode.QRCode(
         version=None,
@@ -477,15 +475,16 @@ with tab_admin:
             pwd = st.text_input("Zadaj heslo:", type="password", key="admin_pwd_input")
             if st.button("Prihlásiť sa", key="admin_login_btn"):
                 if pwd == ADMIN_PASSWORD:
-                    st.query_params.pop("auth", None)
                     st.session_state["admin_authenticated"] = True
+                    st.query_params["admin"] = ADMIN_TOKEN
                     st.rerun()
                 else:
                     st.error("Nesprávne heslo.")
             st.stop()
 
-    if st.button("🔒 Odhlásiť sa zo správy", key="admin_logout_btn"):
+        if st.button("Odhlásiť sa zo správy", key="admin_logout_btn"):
             st.session_state["admin_authenticated"] = False
+            st.query_params.pop("admin", None)
             st.rerun()
 
 
