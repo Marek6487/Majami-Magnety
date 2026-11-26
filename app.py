@@ -22,7 +22,7 @@ def get_admin_token():
 
 if st.query_params.get("auth") == get_admin_token():
     st.session_state["admin_authenticated"] = True
-Majami198521
+secret_src = "Majami198521"
 def make_qr_png_bytes(url: str) -> bytes:
     qr = qrcode.QRCode(
         version=None,
