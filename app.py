@@ -321,7 +321,7 @@ with tab_customer:
     if "pocitadlo_nahratia" not in st.session_state:
         st.session_state["pocitadlo_nahratia"] = 0
     if "ulozene_meno_zakaznika" not in st.session_state:
-    st.session_state["ulozene_meno_zakaznika"] = ""
+        st.session_state["ulozene_meno_zakaznika"] = ""
     
     col1, col2 = st.columns(2)
     with col1:
