@@ -257,13 +257,13 @@ def render_a4_pdf(slot_items: list[dict], summary_names: list[str]) -> bytes:
             "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
         ]:
             try:
-                font = ImageFont.truetype(p, 38)
+                font = ImageFont.truetype(p, 34)
                 break
             except Exception:
                 pass
     if font is None:
             try:
-                font = ImageFont.load_default(size=44)
+                font = ImageFont.load_default(size=34)
             except Exception:
                 font = ImageFont.load_default()
     for idx, slot in enumerate(active_slots):
